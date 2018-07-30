@@ -1,8 +1,6 @@
 export default function (state = {}, action) {
+  console.log(action);
   switch (action.type) {
-    case 'value':
-      return state;
-
     default:
       return state;
   }

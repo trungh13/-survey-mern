@@ -23,25 +23,21 @@ passport.use(
       callbackURL: '/auth/github/callback',
       proxy: true
     },
-    function(accessToken, refreshToken, profile, done) {
-      User.findOne({ userId: profile.id }).then((existingUser) => {
-        if (existingUser) {
-          //already have record with given profile ID
-          done(null, existingUser);
-        } else {
-          //don't have record with given profile ID
-          new User({
-            userId: profile.id,
-            provider: 'github',
-            name: profile.displayName
-          })
-            .save()
-            .then((user) => done(null, user));
-        }
-      });
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ userId: profile.id });
+      if (existingUser) {
+        done(null, existingUser);
+      }
+      const user = await new User({
+        userId: profile.id,
+        provider: 'github',
+        name: profile.displayName
+      }).save();
+      done(null, user);
     }
   )
 );
+
 passport.use(
   new GoogleStrategy(
     {
@@ -52,11 +48,9 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       const existingUser = await User.findOne({ userId: profile.id });
-
       if (existingUser) {
         done(null, existingUser);
       }
-
       const user = await new User({
         userId: profile.id,
         provider: 'google',
