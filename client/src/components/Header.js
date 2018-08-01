@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Payments from './Payments';
 
 const Header = (props) => {
+  const { auth } = props;
   const renderContent = () => {
-    const { auth } = props;
     switch (auth) {
       case null:
         return '';
@@ -15,20 +17,23 @@ const Header = (props) => {
           </li>
         );
       default:
-        return (
-          <li>
+        return [
+          <li key="1">
+            <Payments />
+          </li>,
+          <li key="2">
             <a href="/api/logout">Logout</a>
-          </li>
-        );
+          </li>,
+        ];
     }
   };
+  console.log('auth', auth);
   return (
     <nav>
-      {console.log('props', props)}
       <div className="nav-wrapper">
-        <a href="/" className="brand-logo left">
+        <Link to={auth ? '/surveys' : '/'} className="brand-logo left">
           Survey application
-        </a>
+        </Link>
         <ul className="right">{renderContent()}</ul>
       </div>
     </nav>

@@ -6,5 +6,7 @@ module.exports = {
   githubClientSecret: process.env.GITHUB_CLIENT_SECRET,
   mongoURI: process.env.MONGO_URI,
   cookieKey: process.env.COOKIE_KEY,
-  redirectURI: 'https://shrouded-depths-80662.herokuapp.com/'
+  redirectURI: 'https://shrouded-depths-80662.herokuapp.com/',
+  stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY
 };
