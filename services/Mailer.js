@@ -33,22 +33,23 @@ class Mailer extends helper.Mail {
 
   addRecipients() {
     const personalize = new helper.Personalization();
-    this.recipients.forEach((recipient) => {
+
+    this.recipients.forEach(recipient => {
       personalize.addTo(recipient);
     });
     this.addPersonalization(personalize);
   }
 
   async send() {
-    console.log('Its not running');
     const request = this.sgApi.emptyRequest({
       method: 'POST',
-      path: 'v3/mail/send',
+      path: '/v3/mail/send',
       body: this.toJSON()
     });
 
-    const response = this.sgApi.API(request);
+    const response = await this.sgApi.API(request);
     return response;
   }
 }
+
 module.exports = Mailer;
