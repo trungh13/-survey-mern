@@ -6,8 +6,8 @@ import * as actions from '../actions';
 
 import Header from './Header';
 import Landing from './Landing';
+import Dashboard from './Dashboard';
 
-const Dashboard = () => <h2>Dashboard</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
 
 class App extends Component {
@@ -33,10 +33,10 @@ class App extends Component {
 }
 
 App.propTypes = {
-  fetchUser: PropTypes.func.isRequired,
+  fetchUser: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  actions,
+  actions
 )(App);
