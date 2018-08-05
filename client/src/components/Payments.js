@@ -7,7 +7,7 @@ import * as actions from '../actions';
 const Payments = ({ handleToken }) => (
   <StripeCheckout
     name="Survey application"
-    description="5€ for 5 email credits, hyst "
+    description="5€ for 5 email credits, Test mode ! "
     currency="EUR"
     amount={500}
     token={(token) => {
