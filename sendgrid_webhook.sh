@@ -1,5 +1,5 @@
 function localtunnel {
-  lt -s lt-surveyapp --port 5000
+  lt -s empty-localtunnel-here-just-me --port 5000
 }
 until localtunnel; do
 echo "localtunnel server crashed"
