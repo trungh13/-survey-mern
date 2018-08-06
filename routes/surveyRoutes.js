@@ -9,12 +9,16 @@ module.exports = (app) => {
   app.get('/api/surveys/thanks', (req, res) => {
     res.send('Thanks for voting!');
   });
+  app.post('/api/surveys/webhooks', (req, res) => {
+    console.log(req.body);
+    res.send({});
+  });
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
-    const { title, subject, body, recipients } = req.body;
-
+    const { title, subject, emailBody, recipients } = req.body;
+    console.log('req.body', req.body);
     const survey = new Survey({
       title,
-      body,
+      emailBody,
       subject,
       recipients: recipients.split(',').map((email) => ({ email: email.trim() })),
       _user: req.user.id,

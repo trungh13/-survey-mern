@@ -6,20 +6,15 @@ import PropTypes from 'prop-types';
 
 import SurveyField from './SurveyField';
 import validateEmails from '../../utils/validateEmails';
+import formFields from './formFields';
 
-const FIELDS = [
-  { label: 'Survey Title', type: 'text', name: 'title' },
-  { label: 'Subject Line', type: 'text', name: 'subject' },
-  { label: 'Email body', type: 'text', name: 'emailBody' },
-  { label: 'Recipient List', type: 'text', name: 'recipients' },
-];
-const SurveyForm = ({ handleSubmit }) => {
-  const renderFields = () => _.map(FIELDS, ({ label, name, type }) => (
+const SurveyForm = ({ handleSubmit, onSurveySubmit }) => {
+  const renderFields = () => _.map(formFields, ({ label, name, type }) => (
       <Field component={SurveyField} type={type} label={label} name={name} key={name} />
   ));
   return (
     <div>
-      <form onSubmit={handleSubmit(values => console.log('values', values))}>
+      <form onSubmit={handleSubmit(onSurveySubmit)}>
         {renderFields()}
         <Link className="red btn-flat white-text" to="/surveys">
           Cancel
@@ -34,7 +29,7 @@ const SurveyForm = ({ handleSubmit }) => {
 function validate(values) {
   const errors = {};
   errors.recipients = validateEmails(values.recipients || '');
-  _.each(FIELDS, ({ label, name }) => {
+  _.each(formFields, ({ label, name }) => {
     if (!values[name]) {
       errors[name] = `You must provide ${label}`;
     }
@@ -44,8 +39,10 @@ function validate(values) {
 }
 SurveyForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  onSurveySubmit: PropTypes.func.isRequired,
 };
 export default reduxForm({
   validate,
   form: 'surveyForm',
+  destroyOnUnmount: false,
 })(SurveyForm);
