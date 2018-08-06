@@ -19,12 +19,12 @@ class App extends Component {
     return (
       <div className="container">
         <BrowserRouter>
-          <React.Fragment>
+          <div className="container">
             <Header />
             <Route exact path="/" component={Landing} />
             <Route exact path="/surveys" component={Dashboard} />
             <Route exact path="/surveys/new" component={SurveyNew} />
-          </React.Fragment>
+          </div>
         </BrowserRouter>
       </div>
     );
@@ -32,10 +32,10 @@ class App extends Component {
 }
 
 App.propTypes = {
-  fetchUser: PropTypes.func.isRequired
+  fetchUser: PropTypes.func.isRequired,
 };
 
 export default connect(
   null,
-  actions
+  actions,
 )(App);
