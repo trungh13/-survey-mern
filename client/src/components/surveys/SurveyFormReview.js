@@ -11,8 +11,8 @@ const SurveyFormReview = ({
 }) => {
   const reviewFields = _.map(formFields, ({ name, label }) => (
     <div key={name}>
-      <label htmlFor={name}>{label}</label>
-      <div id={name}>{formValues[name]}</div>
+      <h6>{label}</h6>
+      <div>{formValues[name]}</div>
     </div>
   ));
   return (

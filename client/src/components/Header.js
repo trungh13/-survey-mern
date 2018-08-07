@@ -9,8 +9,6 @@ const Header = (props) => {
   const renderContent = () => {
     switch (auth) {
       case null:
-        return '';
-      case false:
         return (
           <li>
             <a href="/auth/google">Login with google </a>
@@ -43,7 +41,10 @@ const Header = (props) => {
   );
 };
 Header.propTypes = {
-  auth: PropTypes.shape.isRequired,
+  auth: PropTypes.shape({}),
+};
+Header.defaultProps = {
+  auth: null,
 };
 function mapStateToProps({ auth }) {
   return { auth };
