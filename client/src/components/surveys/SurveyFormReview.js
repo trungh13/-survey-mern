@@ -35,13 +35,10 @@ const SurveyFormReview = ({
 
 SurveyFormReview.propTypes = {
   onCancel: PropTypes.func.isRequired,
-  formValues: PropTypes.shape,
+  formValues: PropTypes.shape({}).isRequired,
   submitSurvey: PropTypes.func.isRequired,
-  history: PropTypes.shape.isRequired,
-};
-SurveyFormReview.defaultProps = {
-  formValues: {},
-};
+  history: PropTypes.shape({}).isRequired,
+};  
 function mapStateToProps(state) {
   return { formValues: state.form.surveyForm.values };
 }

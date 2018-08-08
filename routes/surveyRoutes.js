@@ -21,6 +21,7 @@ module.exports = (app) => {
 
   app.post('/api/surveys/webhooks', (req, res) => {
     const p = new Path('/api/surveys/:surveyId/:choice');
+    console.log('webhook req.body', req.body);
 
     _.chain(req.body)
       .map(({ email, url }) => {
@@ -53,7 +54,6 @@ module.exports = (app) => {
 
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
     const { title, subject, emailBody, recipients } = req.body;
-    console.log('req.body', req.body);
     const survey = new Survey({
       title,
       emailBody,

@@ -12,7 +12,7 @@ const SurveyField = ({ input = {}, label, meta: { error, touched } }) => (
 );
 
 SurveyField.propTypes = {
-  input: PropTypes.shape.isRequired,
+  input: PropTypes.shape({}).isRequired,
   label: PropTypes.string.isRequired,
   meta: PropTypes.shape({
     touched: PropTypes.bool,
