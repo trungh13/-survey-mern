@@ -6,9 +6,7 @@ import { withRouter } from 'react-router-dom';
 import formFields from './formFields';
 import * as actions from '../../actions';
 
-const SurveyFormReview = ({
-  onCancel, formValues, submitSurvey, history,
-}) => {
+const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
   const reviewFields = _.map(formFields, ({ name, label }) => (
     <div key={name}>
       <h6>{label}</h6>
@@ -37,12 +35,12 @@ SurveyFormReview.propTypes = {
   onCancel: PropTypes.func.isRequired,
   formValues: PropTypes.shape({}).isRequired,
   submitSurvey: PropTypes.func.isRequired,
-  history: PropTypes.shape({}).isRequired,
-};  
+  history: PropTypes.shape({}).isRequired
+};
 function mapStateToProps(state) {
   return { formValues: state.form.surveyForm.values };
 }
 export default connect(
   mapStateToProps,
-  actions,
+  actions
 )(withRouter(SurveyFormReview));
