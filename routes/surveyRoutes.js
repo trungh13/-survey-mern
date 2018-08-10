@@ -20,9 +20,7 @@ module.exports = (app) => {
   });
 
   app.post('/api/surveys/webhooks', (req, res) => {
-    const p = new Path('api/surveys/:surveyId/:choice');
-    console.log('webhook req.body', req.body);
-
+    const p = new Path('/api/surveys/:surveyId/:choice');
     _.chain(req.body)
       .map(({ email, url }) => {
         const match = p.test(new URL(url).pathname);
@@ -33,6 +31,7 @@ module.exports = (app) => {
       .compact()
       .uniqBy('email', 'surveyId')
       .each(({ surveyId, email, choice }) => {
+        console.log({ surveyId, email, choice });
         Survey.updateOne(
           {
             _id: surveyId,

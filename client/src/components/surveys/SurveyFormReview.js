@@ -9,7 +9,9 @@ import * as actions from '../../actions';
 const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
   const reviewFields = _.map(formFields, ({ name, label }) => (
     <div key={name}>
-      <h6>{label}</h6>
+      <h6>
+        <strong>{label}</strong>
+      </h6>
       <div>{formValues[name]}</div>
     </div>
   ));
@@ -17,6 +19,7 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
     <div>
       <h5>Please confirm your entities</h5>
       {reviewFields}
+      <br/>
       <button className="yellow darken-2 white-text btn-flat" type="button" onClick={onCancel}>
         Back
       </button>
